@@ -61,19 +61,10 @@ def render_markdown(
                 lines.append(f"  - {result.tool_name}: {result.exit_code} ({status})")
             lines.append("")
 
-        # Pointers to saved log files
+        # Pointers to saved artifacts (only manifest and inventory)
         lines.append("**Saved Artifacts:**")
         lines.append(f"  - Manifest: `{run_path / 'manifest.json'}`")
         lines.append(f"  - Inventory: `{run_path / 'inventory.json'}`")
-        for tool in ["terraform", "tfsec", "checkov"]:
-            tool_dir = run_path / tool
-            if tool_dir.exists():
-                lines.append(f"  - {tool.title()} logs: `{tool_dir}/`")
-                lines.append(f"    - Command: `{tool_dir / 'cmd.txt'}`")
-                lines.append(f"    - Stdout: `{tool_dir / 'stdout.log'}`")
-                lines.append(f"    - Stderr: `{tool_dir / 'stderr.log'}`")
-                if (tool_dir / "results.json").exists():
-                    lines.append(f"    - Results: `{tool_dir / 'results.json'}`")
         lines.append("")
 
     # Scan Plan (includes tool routing information)

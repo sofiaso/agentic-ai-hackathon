@@ -10,9 +10,11 @@ Your task is to analyze a human request and select the appropriate scanning tool
 
 {{ user_request }}
 
+**Note:** The user request may be a git commit message. If so, interpret it as describing the changes or intent of the commit. Focus on the main message content, ignoring conventional commit prefixes (feat:, fix:, etc.) or issue numbers (#123) if present.
+
 ## Instructions
 
-1. Analyze the user request to understand what they want to find or check
+1. Analyze the user request (or commit message) to understand what they want to find or check
 2. Select one or more tools from the catalog that best match the user's intent
 3. Use the tool_id values exactly as shown above (terraform_validate, tfsec, checkov)
 4. If the user request is unclear, broad, or no tool clearly matches, select checkov (the general fallback tool) with fallback_used=true

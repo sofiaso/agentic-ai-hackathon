@@ -24,7 +24,7 @@ class ToolRouterOutput(BaseModel):
     )
     fallback_used: bool = Field(
         default=False,
-        description="True if fallback tool (checkov) was selected because no other tool matched",
+        description="True if fallback tool (tfsec) was selected because no other tool matched",
     )
     rationale: str = Field(
         ...,

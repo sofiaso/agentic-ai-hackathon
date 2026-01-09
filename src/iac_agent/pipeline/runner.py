@@ -26,7 +26,6 @@ from iac_agent.observability.run_artifacts import (
     create_run_directory,
     save_inventory,
     save_manifest,
-    save_tool_artifacts,
 )
 from iac_agent.pipeline.paths import resolve_scan_paths
 from iac_agent.pipeline.repo import prepare_repo
@@ -46,7 +45,7 @@ def run_pipeline(
     llm_model_id: str | None = None,
     llm_region: str | None = None,
     llm_tool_router: bool | None = None,
-    general_tool: str = "checkov",
+    general_tool: str = "tfsec",
 ) -> tuple[Report, RunMetrics, Path | None]:
     """
     Run the complete IaC assessment pipeline.
@@ -62,7 +61,7 @@ def run_pipeline(
         llm_model_id: LLM model ID (defaults to env BEDROCK_MODEL_ID or "eu.amazon.nova-2-lite-v1:0")
         llm_region: AWS region for LLM (defaults to env AWS_REGION/AWS_DEFAULT_REGION or "eu-north-1")
         llm_tool_router: Whether to use LLM tool router (default True if llm_enable, else False)
-        general_tool: General fallback tool ID (default "checkov")
+        general_tool: General fallback tool ID (default "tfsec")
 
     Returns:
         Tuple of (Report, RunMetrics, run_path)
@@ -236,12 +235,6 @@ def run_pipeline(
                 }
             )
 
-            # Save artifacts if executing
-            if execute_tools and run_path:
-                save_tool_artifacts(
-                    run_path, "terraform", result, cmd, cwd, scan_path, started_at, finished_at, original_stdout
-                )
-
         if ScanPlanOption.TFSEC in tools_to_run or ScanPlanOption.ALL in tools_to_run:
             result, started_at, finished_at, cmd, cwd, original_stdout = run_tfsec(scan_path, execute_tools)
             tool_results.append(result)
@@ -266,12 +259,6 @@ def run_pipeline(
                 }
             )
 
-            # Save artifacts if executing
-            if execute_tools and run_path:
-                save_tool_artifacts(
-                    run_path, "tfsec", result, cmd, cwd, scan_path, started_at, finished_at, original_stdout
-                )
-
         if ScanPlanOption.CHECKOV in tools_to_run or ScanPlanOption.ALL in tools_to_run:
             result, started_at, finished_at, cmd, cwd, original_stdout = run_checkov(scan_path, execute_tools)
             tool_results.append(result)
@@ -295,12 +282,6 @@ def run_pipeline(
                     "success": result.success,
                 }
             )
-
-            # Save artifacts if executing
-            if execute_tools and run_path:
-                save_tool_artifacts(
-                    run_path, "checkov", result, cmd, cwd, scan_path, started_at, finished_at, original_stdout
-                )
 
     # Stage 5: Deduplicate findings
     findings_raw_count = len(all_findings)

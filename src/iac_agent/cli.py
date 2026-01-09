@@ -129,10 +129,10 @@ def scan(
         str,
         typer.Option(
             "--general-tool",
-            help="General fallback tool ID (default: checkov)",
+            help="General fallback tool ID (default: tfsec)",
             show_default=True,
         ),
-    ] = "checkov",
+    ] = "tfsec",
 ) -> None:
     """
     Run IaC security assessment pipeline.

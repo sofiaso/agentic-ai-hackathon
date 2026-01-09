@@ -217,9 +217,9 @@ def get_fallback_tool() -> ToolId:
     Get the fallback tool ID when no tool matches.
 
     Returns:
-        Fallback tool ID (always "terraform_validate")
+        Fallback tool ID (always "tfsec")
     """
-    return "terraform_validate"
+    return "tfsec"
 
 
 def get_tool_by_id(tool_id: str) -> ToolDescriptor | None:

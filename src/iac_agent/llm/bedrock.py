@@ -166,6 +166,13 @@ class BedrockClient:
                 f"response_length={len(text)} chars"
             )
             logger.debug(f"LLM response preview: {text_preview}")
+            
+            # Print full response to console
+            print("\n" + "="*80)
+            print("LLM RESPONSE:")
+            print("="*80)
+            print(text)
+            print("="*80 + "\n")
 
             return LLMCallResult(
                 text=text,
