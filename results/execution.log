@@ -1,0 +1,55 @@
+================================================================================
+IaC Agent Execution Log
+================================================================================
+Scan ID: 488a861326f96473
+Target: https://github.com/terraform-aws-modules/terraform-aws-opensearch
+Timestamp: 2026-01-09T09:25:46.016434
+Request: Comprehensive security assessment for FedRAMP Moderate compliance gaps
+
+--------------------------------------------------------------------------------
+Pipeline Summary
+--------------------------------------------------------------------------------
+Total Findings: 0
+Total Gaps: 0
+Pipeline Duration: 8.87s
+LLM Enabled: True
+LLM Calls: 1
+LLM Failures: 0
+
+--------------------------------------------------------------------------------
+Tool Execution Results (Detailed)
+--------------------------------------------------------------------------------
+
+[1] checkov
+----------------------------------------
+Status: FAILED
+Exit Code: 127
+Duration: 0.01s
+
+STDOUT:
+----------------------------------------
+(empty)
+
+STDERR:
+----------------------------------------
+Tool 'checkov' not found. Please install it.
+
+
+[2] checkov
+----------------------------------------
+Status: FAILED
+Exit Code: 127
+Duration: 0.01s
+
+STDOUT:
+----------------------------------------
+(empty)
+
+STDERR:
+----------------------------------------
+Tool 'checkov' not found. Please install it.
+
+
+================================================================================
+End of Execution Log
+================================================================================
